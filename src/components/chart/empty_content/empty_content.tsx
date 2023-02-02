@@ -20,7 +20,7 @@ export function defaultEmptyContent(props: EmptyContentProps) {
     >
       <img
         alt="empty-image"
-        src="../../../img/empty.png"
+        src="https://s1.vika.cn/space/2022/02/16/7f9dca59465c4ac8be91dbbf1ab4abad"
         style={{
           width: 160,
           height: 120,
