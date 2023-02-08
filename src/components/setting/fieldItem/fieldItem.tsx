@@ -22,7 +22,8 @@ export const FieldItem: React.FC<IFieldItem> = (props) => {
   const number_fields = getNumFields(viewId);
 
   const changeHandler = (option) => {
-    dimensionFieldIds.splice(i, 1, option.value);
+    let tempDimensionFieldIds = [...dimensionFieldIds]
+    tempDimensionFieldIds.splice(i, 1, option.value);
     // // TODO: Subsequent sorting function development modify this function
     // switch (mode) {
     //   case "2":
@@ -42,8 +43,7 @@ export const FieldItem: React.FC<IFieldItem> = (props) => {
     //     );
     //     break;
     // }
-
-    setConfig(config);
+    setConfig({ ...config, dimensionFieldIds: tempDimensionFieldIds });
   };
 
   return isSettingOpened ? (
@@ -75,8 +75,9 @@ export const FieldItem: React.FC<IFieldItem> = (props) => {
           size="small"
           className={"dragHandler"}
           onClick={() => {
-            config.dimensionFieldIds.splice(i, 1);
-            setConfig({ ...config, dimensionFieldIds });
+            let tempDimensionFieldIds = [...config.dimensionFieldIds]
+            tempDimensionFieldIds.splice(i, 1);
+            setConfig({ ...config, dimensionFieldIds: tempDimensionFieldIds });
           }}
         />
       </IconWrap>
