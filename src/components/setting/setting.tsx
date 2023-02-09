@@ -88,8 +88,9 @@ export const Setting: React.FC<ISettingProps> = (props) => {
       console.error("No empty position");
       return;
     }
-    dimensionFieldIds.push(number_fields[first_one].id);
-    setConfig(config);
+    let tempDimensionFieldIds = [...dimensionFieldIds]
+    tempDimensionFieldIds.push(number_fields[first_one].id);
+    setConfig({ ...config, dimensionFieldIds: tempDimensionFieldIds });
   };
 
   return (
