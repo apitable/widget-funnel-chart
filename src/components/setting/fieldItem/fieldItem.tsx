@@ -1,6 +1,6 @@
 import { IconButton, Select, useThemeColors } from "@apitable/components";
 import { DeleteOutlined } from "@apitable/icons";
-import { useFields, useRecords, useSettingsButton } from "@apitable/widget-sdk";
+import { useSettingsButton } from "@apitable/widget-sdk";
 import { getNumFields } from "../../utils";
 import { IConfig } from "index";
 import React from "react";
@@ -17,7 +17,6 @@ export const FieldItem: React.FC<IFieldItem> = (props) => {
   const [isSettingOpened] = useSettingsButton();
   const { i, v, config, setConfig } = props; // The "i" is an index in dimensionFieldids, the "v" is the value of dimensionFieldids
   const { dimensionFieldIds, viewId } = config;
-  const allFields = useFields(viewId);
   const colors = useThemeColors()
   const number_fields = getNumFields(viewId);
 

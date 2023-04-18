@@ -4,11 +4,8 @@ import {
   useSelection,
   useCloudStorage,
   useActiveViewId,
-  useFields,
   useMeta,
   useViewIds,
-  useDatasheet,
-  FieldType,
   useSettingsButton,
 } from "@apitable/widget-sdk";
 import { ThemeProvider, useThemeColors } from "@apitable/components";
@@ -25,6 +22,7 @@ export enum SortType {
 
 export interface IConfig {
   viewId: string | undefined;
+  filter: string | null;
   freeze: boolean;
   dimensionFieldIds: string[];
   sortType: SortType;
@@ -50,6 +48,7 @@ export const useGetDefaultConfig = () => {
   return useCallback(() => {
     return {
       viewId: defaultViewId, // View ID
+      filter: null,
       freeze: false, // whether to lock
       dimensionFieldIds: defaultDimensionFieldIds, // The selected field's ID
       sortType: SortType.None, // Sorting mode, default is None

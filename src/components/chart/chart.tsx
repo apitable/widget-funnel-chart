@@ -42,13 +42,13 @@ const getRecordIndex = (allRecords, selection, individualSelection, freeze) => {
 
 export const View: React.FC<IViewProps> = (props) => {
   const { config, setConfig, editable } = props;
-  const { viewId, dimensionFieldIds, selection, freeze } = config;
+  const { viewId, filter, dimensionFieldIds, selection, freeze } = config;
   const { runtimeEnv } = useMeta();
   const { isFullscreen } = useViewport();
   const currSelection = useSelection();
-  const allRecords = useRecords(viewId);
+  const recordQuery = useMemo(() => ({ filter }), [filter]);
+  const allRecords = useRecords(viewId, recordQuery);
   const [isMulti, _setIsMulti] = useCloudStorage("isMulti", false);
-
 
   const setIsMulti = useCallback(
     (isMulti) => {
@@ -113,7 +113,7 @@ export const View: React.FC<IViewProps> = (props) => {
     if (allRecords.length > 0) {
       setCurrentRecordIndex(newRecordIndex);
     }
-  }, [recordIdsInSelectionStr, freeze, allRecords]);
+  }, [recordIdsInSelectionStr, freeze]);
 
   const changeCurrentRecordIndex = () => {
     if (
@@ -143,6 +143,7 @@ export const View: React.FC<IViewProps> = (props) => {
 
   const multiRecords = useRecords(viewId, {
     ids: individualSelection?.recordIds,
+    filter
   });
 
   const singleRecord = allRecords.length

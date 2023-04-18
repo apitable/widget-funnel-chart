@@ -72,6 +72,30 @@
     "add_a_dimension": {
       "zh_CN": "添加维度",
       "en_US": "Add"
+    },
+    "filters_amount": {
+			"zh_CN": " 个筛选",
+			"en_US": " filter(s)"
+		},
+		"filter_modal_title": {
+			"zh_CN": "筛选设置",
+			"en_US": "Filter Setting"
+		},
+		"add_filter": {
+			"zh_CN": "添加筛选条件",
+			"en_US": "Add filter"
+		},
+		"confirm": {
+			"zh_CN": "确认",
+			"en_US": "Confirm"
+		},
+		"cancel": {
+			"zh_CN": "取消",
+			"en_US": "Cancel"
+		},
+    "filter": {
+      "zh_CN": "筛选",
+			"en_US": "Filter"
     }
   }
 }

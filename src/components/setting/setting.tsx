@@ -1,8 +1,7 @@
 import { IConfig } from "index";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   useActiveViewId,
-  useFields,
   useMeta,
   useSettingsButton,
   useViewIds,
@@ -10,22 +9,23 @@ import {
   RuntimeEnv
 } from "@apitable/widget-sdk";
 
-import { Box, Typography, Button, Alert, Tooltip, useThemeColors } from "@apitable/components";
+import { Typography, Button, Alert, Tooltip, useThemeColors } from "@apitable/components";
 import { AddOutlined, InformationSmallOutlined } from "@apitable/icons";
 import { FieldItem } from "./fieldItem/fieldItem";
 import { SettingPanel } from "./styled";
 import { getNumFields, Strings } from "../utils";
+import { FilterSelect } from "./filter_select";
 
 
 
 const FormItem = ({ label, colors, children }) => {
   return (
-    <Box>
+    <div style={{ marginBottom: 16 }}>
       <Typography style={{ fontSize: "12px", color: colors.fc3 }}>
         {label}
       </Typography>
       <div style={{ width: "100%" }}>{children}</div>
-    </Box>
+    </div>
   );
 };
 
@@ -45,10 +45,8 @@ export const Setting: React.FC<ISettingProps> = (props) => {
   const { installPosition, runtimeEnv } = useMeta(); // Get the installation location and operating environment of the widget
   const colors = useThemeColors()
 
-
   const activeViewId =
     installPosition === "WidgetPanel" ? useActiveViewId() : useViewIds()[0];
-  const allFields = useFields(viewId);
   const number_fields = getNumFields(viewId);
   const number_fieldIds = number_fields.map((field) => field.id);
   // When create/update/delete the number field, modify the demensionFieldIds synchronous modification
@@ -115,6 +113,13 @@ export const Setting: React.FC<ISettingProps> = (props) => {
       >
         <Typography style={{ fontSize: "14px" }}>{t(Strings.function_settings)}</Typography>
       </div>
+
+      <FormItem label={`${t(Strings.filter)}`} colors={colors}>
+        <FilterSelect 
+          value={config.filter}
+          onChange={(filter) => setConfig({ ...config, filter })}
+        />
+      </FormItem>
 
       <FormItem label={`${t(Strings.select_dimensions)}(${dimensionFieldIds.length}/10)`} colors={colors}>
         {Array.from(dimensionFieldIds, (v: string, i) => {
